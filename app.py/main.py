@@ -15,7 +15,12 @@ def connect_to_db():
 
 
 def add_user():
-    pass
+    name =  input("Enter the user's name: ")
+    email = input("Enter the user's email: ")
+    password = input("Enter the user's password: ")
+    cursor.execute("INSERT INTO user(name, email, password) VALUES (%s, %s, %s)", (name, email, password))
+    db.commit()
+    print("User added successfully!")
 
 
 def list_users():
