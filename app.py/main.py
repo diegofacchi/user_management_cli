@@ -15,12 +15,12 @@ def connect_to_db():
 
 
 def add_user():
-    name =  input("Enter the user's name: ")
-    email = input("Enter the user's email: ")
-    password = input("Enter the user's password: ")
-    cursor.execute("INSERT INTO user(name, email, password) VALUES (%s, %s, %s)", (name, email, password))
+    name =  input("Enter the user's name: ").strip().title()
+    email = input("Enter the user's email: ").strip()
+    password = input("Enter the user's password: ").strip()
+    cursor.execute("INSERT INTO users(name, email, password) VALUES (%s, %s, %s)", (name, email, password))
     db.commit()
-    print("User added successfully!")
+    print_colored_text("User added successfully!", '32')
 
 
 def list_users():
@@ -44,7 +44,7 @@ def menu():
         print_colored_text("4. Delete user", '36')
         print_colored_text("5. Exit", '31')
 
-        choice = input("Choose an option: ").strip()[0]
+        choice = input("Choose an option: ").strip()
 
         if choice == '1':
             add_user()
