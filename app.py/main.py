@@ -6,12 +6,17 @@ def print_colored_text(text, color_code):
 
 
 def connect_to_db():
-    return mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='user_management_cli'
+    try:
+        return mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='',
+            database='user_management_cli'
     )
+
+    except mysql.connector.Error as err:
+        print_colored_text(f"Error: {err}", '31')
+        exit(1)
 
 
 def add_user():
