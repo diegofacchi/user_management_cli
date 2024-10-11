@@ -29,7 +29,15 @@ def add_user():
 
 
 def list_users():
-    pass
+    cursor.execute("SELECT * FROM users")
+    users = cursor.fetchall()
+
+
+    print(f"\n{'ID':<5} | {'Name':<20} | {'Email':<25}")
+    print("-" * 55)
+    for user in users:
+        print(f"{user[0]:<5} | {user[1]:<20} | {user[2]:<25}")
+    print()
 
 
 def edit_users():
