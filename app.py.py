@@ -83,7 +83,8 @@ def menu():
         else:
             print_colored_text("Invalid option. Please try again.", '31')
 
-db = connect_to_db()
-cursor = db.cursor()
-menu()
-db.close()
+if __name__=="__main__":
+    db = connect_to_db()
+    cursor = db.cursor()
+    menu()
+    db.close()
