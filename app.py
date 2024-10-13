@@ -1,5 +1,7 @@
 import mysql.connector
 from time import sleep
+import re
+
 
 def print_colored_text(text, color_code):
     print(f"\033[{color_code}m{text}\033[0m")
@@ -19,9 +21,21 @@ def connect_to_db():
         exit(1)
 
 
+def validate_email(email):
+    return re.match(r"[^@]+@[^@]+\.[^@]+", email)
+
+
 def add_user():
     name =  input("Enter the user's name: ").strip().title()
-    email = input("Enter the user's email: ").strip()
+    
+    while True:
+        email = input("Enter the user's email: ").strip()
+
+        if validate_email(email):
+            break
+        else:
+            print_colored_text("Invalid email format. Please try again.", '31')
+            
     password = input("Enter the user's password: ").strip()
     cursor.execute("INSERT INTO users(name, email, password) VALUES (%s, %s, %s)", (name, email, password))
     db.commit()
