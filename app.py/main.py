@@ -25,7 +25,7 @@ def add_user():
     password = input("Enter the user's password: ").strip()
     cursor.execute("INSERT INTO users(name, email, password) VALUES (%s, %s, %s)", (name, email, password))
     db.commit()
-    print_colored_text("User added successfully!", '32')
+    print_colored_text("\nUser added successfully!", '32')
 
 
 def list_users():
@@ -41,11 +41,20 @@ def list_users():
 
 
 def edit_users():
-    pass
+    user_id = input("Enter the ID of the user you want to edit: ").strip()
+    name = input("Enter the new name for the user: ").strip()
+    email = input("Enter the new email for the user: ").strip()
+    password = input("Enter the new password for the user: ").strip()
+    cursor.execute("UPDATE users SET name=%s, email=%s, password=%s WHERE id=%s", (name, email, password, user_id))
+    db.commit()
+    print_colored_text("\nUser updated successfully!", '32')
 
 
 def delete_user():
-    pass
+    user_id = input("Enter the ID of the user you want to delete: ").strip()
+    cursor.execute("DELETE FROM users WHERE id=%s", (user_id,))
+    db.commit()
+    print_colored_text("\nUser deleted successfully!", '32')
 
 
 def menu():
@@ -77,3 +86,4 @@ def menu():
 db = connect_to_db()
 cursor = db.cursor()
 menu()
+db.close()
